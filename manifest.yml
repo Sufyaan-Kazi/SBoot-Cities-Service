@@ -1,0 +1,10 @@
+---
+applications:
+- name: cities-service-suf
+  memory: 1024M
+  instances: 1
+  host: cities-service-suf-${random-word}
+  path: ./build/libs/boot-cities-service-0.0.1-SNAPSHOT.jar
+  timeout: 160
+  services:
+   - MyDB

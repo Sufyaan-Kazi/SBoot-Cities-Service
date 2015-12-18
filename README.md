@@ -33,6 +33,16 @@ Spring Boot Actuator automatically exposes endpoints which allow you to consume 
 ###How is data loaded!
 With Spring, and Spring Boot there are several ways to get an applicaton to initialise and load data automatically into a database on startup. This application uses flyway, but can also use Hibernate. For mor einfor check out this page: https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html
 
+This application will use Flyway by default to load data into the database. To do this I simply added the flyway maven repo dependency in my build.gradle and Spring Boot takes care of the rest by automatically binding the right datasource and loading it on class initialisation.
+
+Flyway expects the daatabse to be empty (but you can add a property to override this). Flyway will create an additional table in your database which it uses to keep track of which database "migrations" it has performed, so on start up it will see the empty db and "migrate" from scratch. In the future if you want to add more data, change db structure, you just encode these as db migration too and flyway will only aply these new commands. Fly way migrations are simply .sql files, you can write flavours of different sql for different vendors if you need to. Spring Boot will automatically look for these sql files in your apps [src/main/resources/db/migration] folder, and instruct flyway automatically. The names of the .sql files allows flyway to run these SQL commands in the correct order and also for it ot keep track of what commands it has already run, e.g. file V1.sql will run before V1.1. If you later add V1.2, only this file will be executed.
+
+If you don't want to use Flyway, simply comment it out from the dependencies section in the buld.gradle (and Spring Boot will not activate it). You can then simple uncomment the following lines in [src/main/resources/application.properties] file:
+spring.jpa.hibernate.ddl-auto = create
+spring.jpa.hibernate.naming-strategy = org.hibernate.cfg.ImprovedNamingStrategy
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
+
+
 Specifically, this app .... (to be completed)
 ....flyway or hibernate, choice is yours ...
 
@@ -48,6 +58,7 @@ Spring Boot is designed to get you up and running quickly and it is opinioated, 
 * I have not needed to build a mapping config file between java and the db - this is handled by a few simple annotations e.g. @Entity
 * I have not needed to hard code db parameters. When running locally, these are "injected" at runtime using the DataSourceConfig class (it is labelled with a specific @Profile), or just injected by Boot immediatelty when running in Pivotal Cloud Foundry. This can be tweaked to add db pooling etc (https://spring.io/blog/2015/04/27/binding-to-data-services-with-spring-boot-in-cloud-foundry)
 * I have not needed to write any code to locate or parse properties files, Spring Boot just knows where to read it. (https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-profiles.html)
+* I did not need to add the flyway plugin, flyway db params to my build.gradle. Spring Boot automaticaly coonfigures and triggers flyway for me when it finds flyway in my classpath.
 
 Do Check out the following URLs:
 * https://spring.io/guides

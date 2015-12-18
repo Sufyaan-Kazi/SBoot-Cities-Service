@@ -4,7 +4,7 @@ This microservice runs on a local machine or on Cloud Foundry. Note: This is a F
 This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create complex a webservice which exposes CRUD operations as restful endpoints on data in a database.   
 
 ###Running locally!
-Assuming you have access to a database server (e.g. MySQL) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file to point to that db.
+Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file to point to that db.
 
 ###Cloud Foundry!
 Because Spring Boot is opinionated, it automatically binds this app to the correct datasources within your Cloud Foundry space. Hence you just need to create a Service Instance of your preferred db in the space you will be pushing your application. For convenience two shell scripts have been written to do a build and configure of the service instance for you and deploy to cloud foundry. The app will auto-populate data in the table of the db provisioned by Cloud Foundry - see below.

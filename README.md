@@ -35,16 +35,15 @@ With Spring, and Spring Boot there are several ways to get an applicaton to init
 
 This application will use Flyway by default to load data into the database. To do this I simply added the flyway maven repo dependency in my build.gradle and Spring Boot takes care of the rest by automatically binding the right datasource and loading it on class initialisation.
 
-Flyway expects the daatabse to be empty (but you can add a property to override this). Flyway will create an additional table in your database which it uses to keep track of which database "migrations" it has performed, so on start up it will see the empty db and "migrate" from scratch. In the future if you want to add more data, change db structure, you just encode these as db migration too and flyway will only aply these new commands. Fly way migrations are simply .sql files, you can write flavours of different sql for different vendors if you need to. Spring Boot will automatically look for these sql files in your apps the src/main/resources/db/migration folder, and instruct flyway automatically. The names of the .sql files allows flyway to run these SQL commands in the correct order and also for it to keep track of what commands it has already run, e.g. file V1.sql will run before V1.1. If you later add V1.2, only this file will be executed.
+Flyway expects the daatabse to be empty (but you can add a property to override this). Flyway will create an additional table in your database which it uses to keep track of which database "migrations" it has performed, so on start up it will see the empty db and "migrate" from scratch. In the future if you want to add more data, change db structure, you just encode these as db migration too and flyway will only aply these new commands. Fly way migrations are simply .sql files, you can write flavours of different sql for different vendors if you need to. Spring Boot will automatically look for these sql files in your apps the [src/main/resources/db/migration] (src/main/resources/) folder, and instruct flyway automatically. The names of the .sql files allows flyway to run these SQL commands in the correct order and also for it to keep track of what commands it has already run, e.g. file V1.sql will run before V1.1. If you later add V1.2, only this file will be executed.
 
 If you don't want to use Flyway, simply comment it out from the dependencies section in the buld.gradle (and Spring Boot will not activate it). You can then simple uncomment the following lines in [src/main/resources/application.properties] (src/main/resources/application.properties) file:
+
+```
 spring.jpa.hibernate.ddl-auto = create
 spring.jpa.hibernate.naming-strategy = org.hibernate.cfg.ImprovedNamingStrategy
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
-
-
-Specifically, this app .... (to be completed)
-....flyway or hibernate, choice is yours ...
+```
 
 ###Wait, I want a GUI!
 There is a separate application which can be used as a GUI to consume the data deleivred by this Microservice here: https://github.com/skazi-pivotal/spring-boot-cities-ui or feel free to write your own, using that as a guide.

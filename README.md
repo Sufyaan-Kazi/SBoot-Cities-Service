@@ -1,5 +1,5 @@
 # SBoot-Cities-Service
-This microservice runs on a local machine or on Cloud Foundry.
+This microservice runs on a local machine or on Cloud Foundry. Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help tips from my team, Dave Syer and Scott Frederick in this and other branches :)
 
 This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create complex a webserivce which exposes CRUD operations as restful endpoints on data in a database.   
 
@@ -26,8 +26,6 @@ This app is very simple, it is ultimately driven by three classes and some prope
 * CityRepository.java - This "interface" declares both restful endpoints as well as defines SQL operations required. Spring Boot and Spring Web automatically register typical DB endpoints for CRUD operations without the need to edit a web.xml or any other configuration files. Spring also "automagically" builds the right SQL queries to search, update, insert and retirve data from the database by automatically interpreting method names into real logic. This class also returns results as pages (i.e. 20 results at a time, but this can be tweaked using paramters to RESTFUL calls.
 * WebController.java (optional) - This class isn't necessary, however it exposes a new REST endpoint 'cities_all' which lists all cities with no paging or size control options
 * DataSourceConfig.java (optional) - This class isn't necessary, however it allows you to run this application locally on your Mac, desktop etc - it will bound your app to a local MySQL Server. You can use hibernate very easily instead, see the original project this is forked from.
-
-Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities - in time I will do a pull request!
 
 ###Can I get some metrics!
 Spring Boot Actuator automatically exposes endpoints which allow you to consume useful information such as health, configprops, for more info check this out: https://spring.io/guides/gs/actuator-service/

@@ -51,6 +51,9 @@ There is a separate application which can be used as a GUI to consume the data d
 ###This is too simple!!
 Yes it is, but ok then if you want a more advanced Microservice based application you should really check out this Repo: https://github.com/dpinto-pivotal/cf-SpringBootTrader. This is several microservices tied together using some great Netflix OSS features delivered via Spring and Cloud Foundry.
 
+###What about Netflix OSS and Spring Cloud Services?
+Netflix OSS is a great way of managing distributed Microservices. There is another branch of this project which takes advantgaes of Spring Cloud Services in Pivotal Cloud Foundry, therfore automatically including several Netflix OSS features. To see this switch to the SCS branch.
+
 ###Tell me more
 Spring Boot is designed to get you up and running quickly and it is opinionated, so:
 

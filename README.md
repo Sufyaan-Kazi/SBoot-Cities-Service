@@ -1,7 +1,7 @@
 # SBoot-Cities-Service
 This microservice runs on a local machine or on Cloud Foundry. Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, Dave Syer and Scott Frederick in this and other branches :)
 
-This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create complex a webservice which exposes CRUD operations as restful endpoints on data in a database.   
+This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create complex a webservice which exposes CRUD operations as restful endpoints on data in a database.
 
 ###Running locally!
 Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file to point to that db.
@@ -47,6 +47,9 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
 
 ###Wait, I want a GUI!
 There is a separate application which can be used as a GUI to consume the data delivered by this Microservice here: https://github.com/skazi-pivotal/spring-boot-cities-ui or feel free to write your own, using that as a guide.
+
+###This is too simple!!
+Yes it is, but ok then if you want a more advanced Microservice based application you should really check out this Repo: https://github.com/dpinto-pivotal/cf-SpringBootTrader. This is several microservices tied together using some great Netflix OSS features delivered via Spring and Cloud Foundry.
 
 ###Tell me more
 Spring Boot is designed to get you up and running quickly and it is opinionated, so:

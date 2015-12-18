@@ -31,6 +31,9 @@ This app is very simple, it is ultimately driven by three classes and some prope
 Spring Boot Actuator automatically exposes endpoints which allow you to consume useful information such as health, configprops, for more info check this out: https://spring.io/guides/gs/actuator-service/
 
 ###How is data loaded!
+With Spring, and Spring Boot there are several ways to get an applicaton to initialise and load data automatically into a database on startup. This application uses flyway, but can also use Hibernate. For mor einfor check out this page: https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html
+
+Specifically, this app .... (to be completed)
 ....flyway or hibernate, choice is yours ...
 
 ###Wait, I want a GUI!

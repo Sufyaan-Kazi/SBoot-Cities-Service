@@ -1,25 +1,26 @@
 # SBoot-Cities-Service
 This microservice runs on a local machine or on Cloud Foundry.
 
-This is a very simple Spring Boot project to demonstrate how small a footprint of code is required to create a webserivce which does CRUD operations on data in a database. It expose several REST endpoints for doing CRUD operations on data within a database table.  
+This is a very simple Spring Boot project which demonstrates how only small a footprint of code is required to a create complex a webserivce which enables CRUD operations on data in a database. It expose several REST endpoints for doing CRUD operations on data within a database table.  
 
-###Runnign locally!
-Assuming you have access to a database server (e.g. MySQL) or one running on your local machine, this microservice will run immediately on your desktop, within eclipse, standlone etc. Just create an empty database and amend the application.yml file to point to that db.
+###Running locally!
+Assuming you have access to a database server (e.g. MySQL) or one running on your local machine, this microservice will run immediately on your desktop, within eclipse, standalone etc. Just create an empty database and amend the application.yml file to point to that db.
 
 ###Cloud Foundry!
-Because Spring Boot is opinionated, it automatically binds this app to the correct datasoruces within your Cloud Foundry space. Hence you just need to create a Service Instance of your preferred db in the space you will be pushing your application. For convenience two shell scripts have been written to do a build and configure of the service instance for you.
+Because Spring Boot is opinionated, it automatically binds this app to the correct datasources within your Cloud Foundry space. Hence you just need to create a Service Instance of your preferred db in the space you will be pushing your application. For convenience two shell scripts have been written to do a build and configure of the service instance for you. The app will auto-populate data in the table - see below.
 
 If you've never heard of Cloud Foundry - use it! This app is very simple to construct, as soon as you deploy it to Cloud Foundry your entire support infrastructure, app server, libraries etc are configured loaded and deployed within 2 minutes - push this application to our trial instance of cloud foundry at run.pivotal.io
 
 ###Usage!
-When you run this app locally or on CF you can access it using several REStful endpoints. e.g. when running locally:
+When you run this app locally or on CF you can access it using several RESTful endpoints. e.g. when running locally:
 * http://localhost:8080/cities - returns a single page JSON listing cities (20 cities in a page)
 * http://localhost:8080/cities?page=2&size=5&sort=fales - returns only FIVE results from the SECOND page
 * http://localhost:8080/cities/search/name?q=ASJUNTAS - returns a list of cities named ADJUNTAS
-* http://localhost:8080/cities/searc/nameContains?q=WASH&size=3 - returns the first three results of the search to find any cities with a name contianng the word "WASH" (case insensitive search)
+* http://localhost:8080/cities/search/nameContains?q=WASH&size=3 - returns the first three results of the search to find any cities with a name contianng the word "WASH" (case insensitive search)
+* http://localhost:8080/health - This returns the current health of the app, it is provided by Spring Boot Actuator. This and all other actuator endpoints that actuator provides are available immediately.
 
 ###Achitecture!
-This app is very simple:
+This app is very simple, it is ultimately driven by three classes and some properties.
 * SBootCitiesAplication.java - simple class which alows you to run this class as a regular java app. Spring Boot will automaticaly configure and deploy tomcat even though you launch a regular java app.
 * City.java - This class uses JPA to bind to a database table called city. The table is where city data is held, it;s very simple and this class maps java fields to the colun names.
 * CityRepository.java - This "interface" declares both restful endpoints as well as define SQL operations. Spring Boot and Spring Web automatically register typical DB endpoints for CRUD operations without the need to edit web.xml or any other configuration. Spring also automagically builds the right SQL queries to search, update, insert and retirve data from the database by automatically interpreting method names into real logic. This class also returns results as pages (i.e. 20 results at a time, but this can be tweaked using paramters to RESTFUL calls.
@@ -29,7 +30,7 @@ This app is very simple:
 Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities - in time I will do a pull request!
 
 ###Can I get some metrics!
-....actuator ...
+Spring Boot Actuator automatically exposes endpoints which allow you to consume useful information such as health, configprops, for more info check this out: https://spring.io/guides/gs/actuator-service/
 
 ###How is data loaded!
 ....flyway or hibernate, choice is yours ...

@@ -14,7 +14,7 @@ If you've never heard of Cloud Foundry - use it! This app is very simple to cons
 ###Usage!
 When you run this app locally or on CF you can access its features using several RESTful endpoints. Note - this is only a SMALL sample of the endpoints available, this app exposes AHTEOS endpoints. e.g. when running locally:
 * <a href="http://localhost:8080/cities" target="_blank">http://localhost:8080/cities</a> - returns a single page JSON listing cities (20 cities in a page)
-* <a href="http://localhost:8080/cities?page=2&size=5&sort=false" target="_blank">http://localhost:8080/cities?page=2&size=5&sort=false</a> - returns only FIVE results from the SECOND page
+* <a href="http://localhost:8080/cities?page=2&size=5" target="_blank">http://localhost:8080/cities?page=2&size=5</a> - returns only FIVE results from the SECOND page
 * <a href="http://localhost:8080/cities/search/name?q=ADJUNTAS" target="_blank">http://localhost:8080/cities/search/name?q=ADJUNTAS</a> - returns a list of cities named ADJUNTAS
 * <a href="http://localhost:8080/cities/search/nameContains?q=WASH&size=3" target="_blank">http://localhost:8080/cities/search/nameContains?q=WASH&size=3</a> - returns the first three results of the search to find any cities with a name contianng the word "WASH" (case insensitive search)
 * <a href="http://localhost:8080/health" target="_blank">http://localhost:8080/health</a> - This returns the current health of the app, it is provided by Spring Boot Actuator. This and all other actuator endpoints that actuator provides are available immediately.

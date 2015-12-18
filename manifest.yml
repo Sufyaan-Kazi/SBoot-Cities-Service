@@ -1,10 +1,12 @@
 ---
 applications:
-- name: cities-service-suf
+- name: cities
   memory: 1024M
   instances: 1
-  host: cities-service-suf-${random-word}
+  random-route: true
   path: ./build/libs/boot-cities-service-0.0.1-SNAPSHOT.jar
   timeout: 160
   services:
    - MyDB
+env:
+    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom

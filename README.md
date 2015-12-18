@@ -1,5 +1,5 @@
 # SBoot-Cities-Service
-This microservice runs on a local machine or on Cloud Foundry. Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help tips from my team, Dave Syer and Scott Frederick in this and other branches :)
+This microservice runs on a local machine or on Cloud Foundry. Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, Dave Syer and Scott Frederick in this and other branches :)
 
 This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create complex a webserivce which exposes CRUD operations as restful endpoints on data in a database.   
 

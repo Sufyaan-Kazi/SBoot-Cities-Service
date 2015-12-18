@@ -12,7 +12,7 @@ Because Spring Boot is opinionated, it automatically binds this app to the corre
 If you've never heard of Cloud Foundry - use it! This app is very simple to construct, as soon as you deploy it to Cloud Foundry your entire support infrastructure, app server, libraries etc are configured loaded and deployed within 2 minutes - push this application to our trial instance of cloud foundry at run.pivotal.io. This si classic DevOps separation of concerns yet both in harmony together.
 
 ###Usage!
-When you run this app locally or on CF you can access its features using several RESTful endpoints. e.g. when running locally:
+When you run this app locally or on CF you can access its features using several RESTful endpoints. Note - thisis only a SMALL sample of the endpoints, this app exposes AHTEOS endpoints. e.g. when running locally:
 * <a href="http://localhost:8080/cities" target="_blank">http://localhost:8080/cities</a> - returns a single page JSON listing cities (20 cities in a page)
 * <a href="http://localhost:8080/cities?page=2&size=5&sort=false" target="_blank">http://localhost:8080/cities?page=2&size=5&sort=false</a> - returns only FIVE results from the SECOND page
 * <a href="http://localhost:8080/cities/search/name?q=ADJUNTAS" target="_blank">http://localhost:8080/cities/search/name?q=ADJUNTAS</a> - returns a list of cities named ADJUNTAS

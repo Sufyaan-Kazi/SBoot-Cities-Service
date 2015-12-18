@@ -25,6 +25,12 @@ This app is very simple:
 
 Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities - in time I will do a pull request!
 
+###Can I get some metrics!
+....actuator ...
+
+###How is data loaded!
+....flyway or hibernate, choice is yours ...
+
 ###Wait, I want a GUI!
 There is a separate application which can be used as a GUI to consume the data deleivred by this Microservice here: https://github.com/skazi-pivotal/spring-boot-cities-ui or feel free to write your own, using that as a guide.
 
@@ -32,4 +38,8 @@ There is a separate application which can be used as a GUI to consume the data d
 Spring Boot is designed to get you up and running quickly and it is opinioated, so explain:
 
 * I have not needed to define a long list of libraries, in my build.gradle I add a dependency on Spring Boot and then dependencies on specific spring-boot starter projects
-* I have not needed to configure endpoints in my web.xml or configure more detail about wish endpoints exists
+* I have not needed to configure endpoints in my web.xml or configure more detail about which endpoints exists, my CityRepository class automaticaly exposes these as endpoints because of the @RestRepository endpoints
+* I have not needed to define any SQL queries, the methods I list in the repository class are automatically interpreted into queires because of the way I define them -> findByNameIgnoreCase (findBy<field in my entityy><type of find>)
+* I have not needed to build a mapping config file between java and the db - this is handled by a few simple annotations
+* I have not needed to hard code db parameters. These are "injected" at runtime using the DataSoruceConfig class (it is labelled with a specific @Profile), or just injected by Boot immeidatelty when running in Pivotal Cloud Foundry.
+* I have not needed to write nay code to locate or parse properties files, Spring Boot just knows where to read it.

@@ -1,7 +1,10 @@
 # SBoot-Cities-Service
 This microservice runs on a local machine or on Cloud Foundry.
 
-This is a very simple Spring Boot project to demonstrate how small a footprint of code is required to create a webserivce which does CRUD operations on data in a database. It expose several REST endpoints for doing CRUD operations on data within a database table.  Assuming you have a database server (e.g. MySQL) on your local machine it will run immediately on your desktop, just create an empty database and amend the application.yml file to point to that db.
+This is a very simple Spring Boot project to demonstrate how small a footprint of code is required to create a webserivce which does CRUD operations on data in a database. It expose several REST endpoints for doing CRUD operations on data within a database table.  
+
+###Runnign locally!
+Assuming you have access to a database server (e.g. MySQL) or one running on your local machine, this microservice will run immediately on your desktop, within eclipse, standlone etc. Just create an empty database and amend the application.yml file to point to that db.
 
 ###Cloud Foundry!
 Because Spring Boot is opinionated, it automatically binds this app to the correct datasoruces within your Cloud Foundry space. Hence you just need to create a Service Instance of your preferred db in the space you will be pushing your application. For convenience two shell scripts have been written to do a build and configure of the service instance for you.

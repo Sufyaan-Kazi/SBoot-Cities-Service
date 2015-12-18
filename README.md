@@ -13,7 +13,7 @@ If you've never heard of Cloud Foundry - use it! This app is very simple to cons
 
 ###Usage!
 When you run this app locally or on CF you can access its features using several RESTful endpoints. e.g. when running locally:
-* http://localhost:8080/cities - returns a single page JSON listing cities (20 cities in a page)
+* <a href="http://localhost:8080/cities" target="_blank">http://localhost:8080/cities</a> - returns a single page JSON listing cities (20 cities in a page)
 * http://localhost:8080/cities?page=2&size=5&sort=fales - returns only FIVE results from the SECOND page
 * http://localhost:8080/cities/search/name?q=ASJUNTAS - returns a list of cities named ADJUNTAS
 * http://localhost:8080/cities/search/nameContains?q=WASH&size=3 - returns the first three results of the search to find any cities with a name contianng the word "WASH" (case insensitive search)

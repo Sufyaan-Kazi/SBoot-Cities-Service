@@ -10,6 +10,12 @@ logging:
         springframework:
            web: WARN
            cloud: WARN
+spring:
+  application:
+    name: ${vcap.application.application_name:cities}
+security:
+  basic:
+    enabled: false
            
 ---
 spring:

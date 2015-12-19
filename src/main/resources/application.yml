@@ -10,6 +10,12 @@ logging:
         springframework:
            web: WARN
            cloud: WARN
+spring:
+  application:
+    name: ${vcap.application.application_name:cities}
+security:
+  basic:
+    enabled: false
            
 ---
 spring:
@@ -19,3 +25,7 @@ spring:
     url: jdbc:mysql://127.0.0.1/cities_db
     username: suf
     password: password
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

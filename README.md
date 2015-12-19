@@ -1,10 +1,10 @@
 # SBoot-Cities-Service
-This microservice runs on a local machine or on Cloud Foundry. Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, Dave Syer and Scott Frederick in this and other branches :)
+This microservice runs on a local machine or on Cloud Foundry. Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, Dave Syer and Scott Frederick in this and other branches :) This is the SCS branch and so it works with Spring Cloud Services on Pivotal Cloud Foundry.
 
 This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create complex a webservice which exposes CRUD operations as restful endpoints on data in a database.
 
 ###Running locally!
-Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file to point to that db.
+Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file to point to that db. Since this uses Service Deiscovery and other Netflix OSS ideas, you will need to start you own Eureka and Config servers if running locally, check out this project: https://github.com/skazi-pivotal/EurekaServiceReg
 
 ###Cloud Foundry!
 Because Spring Boot is opinionated, it automatically binds this app to the correct datasources within your Cloud Foundry space. Hence, you just need to create a Service Instance of your preferred db in the space where you will be pushing your application and then bind this app to that SI. For convenience two shell scripts have been written to do a build and configure of the service instance as well as deploy to Cloud Foundry. The app will auto-populate data in the table of the db schema provisioned by Cloud Foundry in the SI - see below. Please note, when you first deploy this app it will take a long time to start because several SQL inserts are executing.

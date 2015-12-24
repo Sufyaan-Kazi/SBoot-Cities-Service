@@ -1,6 +1,7 @@
 #!/bin/bash 
 # This push will be slow because we are inserting about 40k city records into the db on initialisation
-./gradlew build
+cf target
+./gradlew build -x test
 APPNAME=cities
 DBSERVICE=MyDB
 DISCOVERY=ServiceReg

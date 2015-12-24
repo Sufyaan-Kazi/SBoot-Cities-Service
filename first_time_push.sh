@@ -1,34 +1,63 @@
 #!/bin/bash 
 
-# This push will be slow because we are inserting about 40k city records into the db on initialisation
+echo_msg()
+{
+  echo ""
+  echo "************** ${1} **************"
+}
+
 build()
 {
-  cf target
+  echo_msg "Building application"
   ./gradlew build -x test
+}
+
+cf_app_delete()
+{
+  EXISTS=`cf apps | grep -c ${1}`
+  if [ $EXISTS -ne 0 ]
+  then
+    cf delete -f ${1}
+  fi
+}
+
+cf_service_delete()
+{
+  #Were we supplied an App name?
+  if [ ! -z "${2}" ]
+  then
+    EXISTS=`cf services | grep ${1} | grep -c ${2} `
+    if [ $EXISTS -ne 0 ]
+    then
+      cf unbind-service ${1} ${2}
+    fi
+  fi
+
+  #Delete the Service Instance
+  EXISTS=`cf services | grep -c ${1}`
+  if [ $EXISTS -ne 0 ]
+  then
+    cf delete-service -f ${1}
+  fi
 }
 
 clean_cf()
 {
-  echo ""
-  echo "******** Removing previous deployment *********"
-  cf delete -f $APPNAME
-  cf delete-service -f $DBSERVICE
-  cf unbind-service $APPNAME $DISCOVERY
-  cf delete-service -f $DISCOVERY
+  echo_msg "Removing previous deployment (if necessary!)"
+  cf_app_delete $APPNAME
+  cf_service_delete $DBSERVICE $APPNAME
+  cf_service_delete $DISCOVERY $APPNAME
 }
 
 push()
 {
   clean_cf
-  echo ""
-  echo "******** Pushing to PCF *********"
+  echo_msg "Pushing to PCF, it will be slow because we are initialising the database as well"
   cf create-service p-mysql 100mb-dev $DBSERVICE
   cf create-service p-service-registry standard $DISCOVERY
   cf push -b java_buildpack_offline --no-start --no-route
-  echo ""
-  echo "Setting environment for SCS"
+  echo_msg "Setting environment for SCS"
   cf set-env $APPNAME CF_TARGET $CF_TARGET
-  echo ""
 
   # Sleep for service registry
   max=12
@@ -38,8 +67,7 @@ push()
   done
 
   # Carry on pushing
-  echo ""
-  echo "Pushing App: $APPNAME!"
+  echo_msg "Pushing App: $APPNAME!"
   cf push -b java_buildpack_offline
 }
 
@@ -49,16 +77,31 @@ main()
   DBSERVICE=MyDB
   DISCOVERY=ServiceReg
 
-  #Check if a CF Target was specified?
-  if [ "$#" -eq 0 ]
+  build 
+
+  # Work out the CF_TARGET
+  CF_TARGET=`cf target | grep "API" | cut -d" " -f5| xargs`
+  PWS=`echo $CF_TARGET | grep -c "run.pivotal.io"`
+  if [ $PWS -ne 0 ]
   then
-    CF_TARGET=https://apps.emea-2.fe.gopivotal.com
-  else
-    CF_TARGET=$1
+    echo_msg "This won't run on PWS, please use another environment"
+    exit 1
   fi
 
-  build
   push
 }
 
+check_cli_installed()
+{
+  #Is the CF CLI installed?
+  echo_msg "Targeting the following CF Environment, org and space"
+  cf target
+  if [ $? -ne 0 ]
+  then
+    echo_msg "!! ERROR: Please install the CF CLI !!!!!!"
+    exit $?
+  fi
+}
+
+check_cli_installed
 main

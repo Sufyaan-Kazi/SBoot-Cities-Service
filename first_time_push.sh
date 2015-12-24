@@ -98,7 +98,7 @@ check_cli_installed()
   cf target
   if [ $? -ne 0 ]
   then
-    echo_msg "!! ERROR: Please install the CF CLI !!!!!!"
+    echo_msg "!!!!!! ERROR: You either don't have the CF CLI installed or you are not connected to an Org or Space !!!!!!"
     exit $?
   fi
 }

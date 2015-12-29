@@ -1,7 +1,7 @@
 # SBoot-Cities-Service
 This microservice runs on a local machine or on Cloud Foundry. Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, as well as Dave Syer and Scott Frederick in this and other branches :) The SCS branch includes updates to work with Spring Cloud Services.
 
-This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create complex a webservice which exposes CRUD operations as restful endpoints on data in a database.
+This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create a complex webservice which exposes CRUD operations as restful endpoints on data in a database.
 
 ###Running locally!
 Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file to point to that db. To run outside of Eclipse just run ./gradlew botRun on your command line. You don't need to have gradle installed.

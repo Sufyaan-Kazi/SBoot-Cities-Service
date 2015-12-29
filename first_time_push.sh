@@ -2,7 +2,7 @@
 first_time()
 {
   cf target
-  ./gradlew build -x test
+  ./gradlew clean build -x test
   cf delete -f cities
   cf delete-service -f MyDB
   cf create-service p-mysql 100mb-dev MyDB

@@ -1,12 +1,16 @@
-DROP TABLE IF EXISTS city;
+DROP TABLE IF EXISTS uktowns;
 
-create table city (
-	id bigint not null auto_increment,
-	county varchar(255),
-	latitude varchar(255),
-	longitude varchar(255),
-	name varchar(255),
-	postal_code varchar(255),
-	state_code varchar(255),
-	primary key (id)
+CREATE TABLE `uktowns` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(2000) CHARACTER SET utf8 DEFAULT NULL,
+  `County` varchar(255) NOT NULL,
+  `Country` varchar(255) NOT NULL,
+  `GridRef` varchar(10) NOT NULL,
+  `Latitude` decimal(10,5) DEFAULT NULL,
+  `Longitude` decimal(10,5) DEFAULT NULL,
+  `Easting` int(11) NOT NULL,
+  `Northing` int(11) NOT NULL,
+  `Postcode` varchar(10) NOT NULL,
+  `Type` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`)
 );

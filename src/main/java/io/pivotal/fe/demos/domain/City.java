@@ -6,8 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="uktowns")
 public class City implements Serializable{
 	
 	/**
@@ -22,9 +24,9 @@ public class City implements Serializable{
     private String name;
 	@Column
     private String county;
-	@Column
+	@Column(name="gridref")
     private String stateCode;
-	@Column
+	@Column(name="postcode")
     private String postalCode;
 	@Column
     private String latitude;

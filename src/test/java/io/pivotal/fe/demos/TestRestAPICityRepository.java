@@ -56,26 +56,4 @@ public class TestRestAPICityRepository {
 		Object apiResponse = restTemplate.getForEntity(url + "?page=0&size=2",Object.class);
 		assertNotNull(apiResponse);
 	}
-
-	@SuppressWarnings("unchecked")
-	@Test
-	public void canFetchBirmingham() {
-		ResponseEntity<Object> apiResponse = restTemplate.getForEntity(url + "/search/name?q=Birmingham",Object.class);
-		assertNotNull(apiResponse);
-		assertNotNull(apiResponse.getBody());
-		//logger.info(apiResponse.getBody() + " - ");
-		assertTrue(getTotalElements((LinkedHashMap<String, Object>) apiResponse.getBody()) == 1);
-		
-		apiResponse = restTemplate.getForEntity(url + "/search/name?q=Birmingham2",Object.class);
-		assertNotNull(apiResponse);
-		assertNotNull(apiResponse.getBody());
-		assertTrue(getTotalElements((LinkedHashMap<String, Object>) apiResponse.getBody()) == 0);
-	}
-	
-	private int getTotalElements(LinkedHashMap<String, Object> respEntity) {
-		@SuppressWarnings("unchecked")
-		LinkedHashMap<String, Integer> page = (LinkedHashMap<String, Integer>) respEntity.get("page");
-		//logger.info(page+ " - ");
-		return page.get("totalElements").intValue();
-	}
 }

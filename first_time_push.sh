@@ -9,7 +9,7 @@ echo_msg()
 build()
 {
   echo_msg "Building application"
-  ./gradlew build -x test
+  ./gradlew build 
 }
 
 cf_app_delete()

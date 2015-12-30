@@ -3,7 +3,7 @@ This microservice runs on a local machine or on Cloud Foundry. Note: This is a F
 
 This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create a complex webservice which exposes CRUD operations as restful endpoints.
 
--> ![Cities](/docs/Arch.png) <-
+![Cities](/docs/Arch.png)
 
 ###Running locally!
 Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file to point to that db. 

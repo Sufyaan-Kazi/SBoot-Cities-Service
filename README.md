@@ -5,8 +5,14 @@ This is a very simple Spring Boot project which demonstrates, that with only sma
 
 ![Cities](/docs/Arch.png)
 
+![Cities](/docs/Arch.png)
+
 ###Running locally!
-Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file to point to that db. Since this uses Service Deiscovery and other Netflix OSS ideas, you will need to start you own Eureka and Config servers if running locally, check out this project: https://github.com/skazi-pivotal/EurekaServiceReg
+Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file to point to that db. Since this uses Service Discovery and other Netflix OSS ideas, you will need to start you own Eureka and Config servers if running locally, check out this project: https://github.com/skazi-pivotal/EurekaServiceReg
+
+To run outside of Eclipse just run 
+```./gradlew bootRun ```
+on your command line. You don't need to have gradle installed.
 
 ###Cloud Foundry!
 Because Spring Boot is opinionated, it automatically binds this app to the correct datasources within your Cloud Foundry space. Hence, you just need to create a Service Instance of your preferred db in the space where you will be pushing your application and then bind this app to that SI. For convenience two shell scripts have been written to do a build and configure of the service instance as well as deploy to Cloud Foundry. The app will auto-populate data in the table of the db schema provisioned by Cloud Foundry in the SI - see below. Please note, when you first deploy this app it will take a long time to start because several SQL inserts are executing.

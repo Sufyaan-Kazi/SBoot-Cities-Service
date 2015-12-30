@@ -1,97 +1,102 @@
 package io.pivotal.fe.demos.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class City implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3931923372161957662L;
-	
+@Table(name = "uktowns")
+public class City {
+
 	@Id
-    @GeneratedValue
+	@GeneratedValue
 	private long id;
 	@Column
-    private String name;
+	private String name;
 	@Column
-    private String county;
+	private String county;
+	@Column(name = "gridref")
+	private String stateCode;
+	@Column(name = "postcode")
+	private String postalCode;
 	@Column
-    private String stateCode;
+	private String latitude;
 	@Column
-    private String postalCode;
-	@Column
-    private String latitude;
-	@Column
-    private String longitude;
-    
-    public City() {
-    	super();
-    }
-    
-    public City(long id, String name, String county, String stateCode, String postalCode) {
-    	this();
-    	setId(id);
-    	setName(name);
-    	setCounty(county);
-    	setStateCode(stateCode);
-    	setPostalCode(postalCode);
-    }
-    
+	private String longitude;
+
+	public City() {
+		super();
+	}
+
+	public City(String name, String county, String stateCode, String postalCode) {
+		this();
+		setName(name);
+		setCounty(county);
+		setStateCode(stateCode);
+		setPostalCode(postalCode);
+	}
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getCounty() {
 		return county;
 	}
+
 	public void setCounty(String county) {
 		this.county = county;
 	}
+
 	public String getStateCode() {
 		return stateCode;
 	}
+
 	public void setStateCode(String stateCode) {
 		this.stateCode = stateCode;
 	}
+
 	public String getPostalCode() {
 		return postalCode;
 	}
+
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
+
 	public String getLatitude() {
 		return latitude;
 	}
+
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
+
 	public String getLongitude() {
 		return longitude;
 	}
+
 	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 
 	@Override
 	public String toString() {
-		return "City [id=" + id + ", name=" + name + ", county=" + county
-				+ ", stateCode=" + stateCode + ", postalCode=" + postalCode
-				+ ", latitude=" + latitude + ", longitude=" + longitude + "]";
+		return "City [id=" + id + ", name=" + name + ", county=" + county + ", stateCode=" + stateCode + ", postalCode=" + postalCode + ", latitude=" + latitude + ", longitude=" + longitude + "]";
 	}
 
 	@Override
@@ -100,15 +105,11 @@ public class City implements Serializable{
 		int result = 1;
 		result = prime * result + ((county == null) ? 0 : county.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result
-				+ ((latitude == null) ? 0 : latitude.hashCode());
-		result = prime * result
-				+ ((longitude == null) ? 0 : longitude.hashCode());
+		result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
+		result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((postalCode == null) ? 0 : postalCode.hashCode());
-		result = prime * result
-				+ ((stateCode == null) ? 0 : stateCode.hashCode());
+		result = prime * result + ((postalCode == null) ? 0 : postalCode.hashCode());
+		result = prime * result + ((stateCode == null) ? 0 : stateCode.hashCode());
 		return result;
 	}
 

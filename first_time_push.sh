@@ -64,7 +64,11 @@ cf_service_delete()
 clean_cf()
 {
   echo_msg "Removing previous deployment (if necessary!)"
-  cf_app_delete $APPNAME
+  APPS=`cf apps | grep $APPNAME | cut -d" " -f1`
+  for app in ${APPS[@]}
+  do
+    cf delete -f $app
+  done
   cf_service_delete $DBSERVICE $APPNAME
   cf_service_delete $DISCOVERY $APPNAME
 }
@@ -75,6 +79,8 @@ push()
   echo_msg "Pushing to PCF, it will be slow because we are initialising the database as well"
   cf create-service p-mysql 100mb-dev $DBSERVICE
   cf create-service p-service-registry standard $DISCOVERY
+  DATE=`date "+%Y%m%d%H%M%S"`
+  APPNAME=$APPNAME-$DATE
   cf push $APPNAME -b java_buildpack_offline --no-start --no-route --no-manifest --no-hostname
   echo_msg "Setting environment for SCS"
   cf set-env $APPNAME CF_TARGET $CF_TARGET
@@ -88,12 +94,12 @@ push()
 
   # Carry on pushing
   echo_msg "Pushing App: $APPNAME!"
-  cf push -b java_buildpack_offline
+  cf push $APPNAME -b java_buildpack_offline
 
   # Add unique route for future versioning
-  DOMAIN=`cf target | grep "API" | cut -d" " -f5 | sed "s/[^.]*.//"`
-  DATE=`date "+%Y%m%d%H%M%S"`
-  cf map-route $APPNAME $DOMAIN -n $APPNAME-$DATE
+  #DOMAIN=`cf target | grep "API" | cut -d" " -f5 | sed "s/[^.]*.//"`
+  #DATE=`date "+%Y%m%d%H%M%S"`
+  #cf map-route $APPNAME $DOMAIN -n $APPNAME-$DATE
 }
 
 main()

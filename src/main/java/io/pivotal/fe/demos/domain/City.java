@@ -37,9 +37,8 @@ public class City implements Serializable{
     	super();
     }
     
-    public City(long id, String name, String county, String stateCode, String postalCode) {
+    public City(String name, String county, String stateCode, String postalCode) {
     	this();
-    	setId(id);
     	setName(name);
     	setCounty(county);
     	setStateCode(stateCode);

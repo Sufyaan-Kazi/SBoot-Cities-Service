@@ -63,6 +63,8 @@ cf_service_delete()
 
 clean_cf()
 {
+  #echo_msg "Removing Orphaned Routes"
+  #cf delete-orphaned-routes -f
   echo_msg "Removing previous deployment (if necessary!)"
   APPS=`cf apps | grep $APPNAME | cut -d" " -f1`
   for app in ${APPS[@]}
@@ -81,7 +83,7 @@ push()
   cf create-service p-service-registry standard $DISCOVERY
   DATE=`date "+%Y%m%d%H%M%S"`
   APPNAME=$APPNAME-$DATE
-  cf push $APPNAME -b java_buildpack_offline --no-start --no-route --no-manifest --no-hostname
+  cf push $APPNAME -b java_buildpack_offline --no-start --no-manifest --random-route
   echo_msg "Setting environment for SCS"
   cf set-env $APPNAME CF_TARGET $CF_TARGET
 
@@ -97,9 +99,9 @@ push()
   cf push $APPNAME -b java_buildpack_offline
 
   # Add unique route for future versioning
-  #DOMAIN=`cf target | grep "API" | cut -d" " -f5 | sed "s/[^.]*.//"`
-  #DATE=`date "+%Y%m%d%H%M%S"`
-  #cf map-route $APPNAME $DOMAIN -n $APPNAME-$DATE
+  DOMAIN=`cf target | grep "API" | cut -d" " -f5 | sed "s/[^.]*.//"`
+  RANDOM_ROUTE=`cf app $APPNAME | grep urls | cut -d":" -f2 | sed "s/-$DATE//" |  cut -d"." -f1 | xargs`
+  cf map-route $APPNAME $DOMAIN -n $RANDOM_ROUTE
 }
 
 main()
@@ -112,12 +114,13 @@ main()
 
   # Work out the CF_TARGET
   CF_TARGET=`cf target | grep "API" | cut -d" " -f5| xargs`
-  #PWS=`echo $CF_TARGET | grep -c "run.pivotal.io"`
-  #if [ $PWS -ne 0 ]
-  #then
-    #echo_msg "This won't run on PWS, please use another environment"
-    #exit 1
-  #fi
+  # Disable PWS until we write the small script to check the name of the java buildpack
+  PWS=`echo $CF_TARGET | grep -c "run.pivotal.io"`
+  if [ $PWS -ne 0 ]
+  then
+    echo_msg "This won't run on PWS, please use another environment"
+    exit 1
+  fi
 
   push
 }

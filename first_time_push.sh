@@ -78,7 +78,7 @@ clean_cf()
 push()
 {
   clean_cf
-  echo_msg "Pushing to PCF, it will be slow because we are initialising the database as well"
+  echo_msg "Making first temp push to PCF"
   cf create-service p-mysql 100mb-dev $DBSERVICE
   cf create-service p-service-registry standard $DISCOVERY
   DATE=`date "+%Y%m%d%H%M%S"`
@@ -95,7 +95,7 @@ push()
   done
 
   # Carry on pushing
-  echo_msg "Pushing App: $APPNAME!"
+  echo_msg "Performing final push to PCF of app $APPNAME, it will be slower than usual because we are initialising the database as well"
   cf push $APPNAME -b java_buildpack_offline
 
   # Add unique route for future versioning

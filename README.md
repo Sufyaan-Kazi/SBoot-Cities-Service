@@ -5,7 +5,9 @@ This is a very simple Spring Boot project which demonstrates, that with only sma
 
 ![Cities](/docs/Arch.png)
 
-![Cities](/docs/Arch.png)
+As you can see above, the Microservice is pretty lightweight, a full explanation of the architecture can be found further down this page. This branch of the Microservice was designed to utilise Netflix OSS features sucj as Eureka, Config Server. As its a Spring app this is very simple when running locally but also I can utilise an enerprise version when running in Pivotal Cloud Foundry
+
+![Cities](/docs/SCS_Arch.png)
 
 ###Running locally!
 Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file to point to that db. Since this uses Service Discovery and other Netflix OSS ideas, you will need to start you own Eureka and Config servers if running locally, check out this project: https://github.com/skazi-pivotal/EurekaServiceReg

@@ -63,8 +63,6 @@ cf_service_delete()
 
 clean_cf()
 {
-  #echo_msg "Removing Orphaned Routes"
-  #cf delete-orphaned-routes -f
   echo_msg "Removing previous deployment (if necessary!)"
   APPS=`cf apps | grep $APPNAME | cut -d" " -f1`
   for app in ${APPS[@]}
@@ -73,6 +71,8 @@ clean_cf()
   done
   cf_service_delete $DBSERVICE $APPNAME
   cf_service_delete $DISCOVERY $APPNAME
+  echo_msg "Removing Orphaned Routes"
+  cf delete-orphaned-routes -f
 }
 
 push()

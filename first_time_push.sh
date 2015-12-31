@@ -115,7 +115,7 @@ main()
   # Work out the CF_TARGET
   CF_TARGET=`cf target | grep "API" | cut -d" " -f5| xargs`
   # Disable PWS until we write the small script to check the name of the java buildpack
-  PWS=`echo $CF_TARGET | grep -c "run.pivotal.io"`
+  PWS=`echo $CF_TARGET | grep "run.pivotal.io" | wc -l`
   if [ $PWS -ne 0 ]
   then
     echo_msg "This won't run on PWS, please use another environment"

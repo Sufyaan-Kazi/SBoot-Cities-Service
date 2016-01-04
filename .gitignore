@@ -18,3 +18,7 @@ hs_err_pid*
 .gradle/
 .project
 .settings/
+
+# Misc Stuff
+*.old
+*.log

@@ -37,7 +37,7 @@ cf_app_delete()
   if [ $EXISTS -ne 0 ]
   then
     echo "Deleting app"
-    cf delete -f ${1}
+    cf delete -f -r ${1}
   fi
 }
 
@@ -100,8 +100,5 @@ main()
 
 SECONDS=0
 trap 'abort' 0
-
 main
-
-trap : 0
 echo_msg "Deployment Complete in $SECONDS seconds."

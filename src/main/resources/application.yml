@@ -20,11 +20,6 @@ security:
 ---
 spring:
   profiles: default
-  datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1/cities_db
-    username: suf
-    password: password
 eureka:
   client:
     serviceUrl:

@@ -32,7 +32,7 @@ import io.pivotal.fe.demos.repositories.CityRepository;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SBootCitiesServiceApplication.class)
 //@WebAppConfiguration
-@WebIntegrationTest(randomPort = true)
+@WebIntegrationTest({"server.port:0", "eureka.client.enabled:false"})
 public class TestCityRepository {
 
 	@Autowired

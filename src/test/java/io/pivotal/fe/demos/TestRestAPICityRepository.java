@@ -30,7 +30,7 @@ import org.springframework.web.client.RestTemplate;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SBootCitiesServiceApplication.class)
 //@WebAppConfiguration
-@WebIntegrationTest(randomPort = true)
+@WebIntegrationTest({"server.port:0", "eureka.client.enabled:false"})
 public class TestRestAPICityRepository {
 	private static final Logger logger = LoggerFactory.getLogger(TestRestAPICityRepository.class);
 	RestTemplate restTemplate = new TestRestTemplate();

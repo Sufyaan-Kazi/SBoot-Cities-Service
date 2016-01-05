@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS uktowns;
 
 CREATE TABLE `uktowns` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(2000) CHARACTER SET utf8 DEFAULT NULL,
+  `Name` varchar(2000) DEFAULT NULL,
   `County` varchar(255) NOT NULL,
   `Country` varchar(255) NOT NULL,
   `GridRef` varchar(10) NOT NULL,

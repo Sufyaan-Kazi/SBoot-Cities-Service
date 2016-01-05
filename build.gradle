@@ -53,7 +53,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
 	compile("org.springframework.boot:spring-boot-starter-data-rest")
 	compile("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
-	runtime("mysql:mysql-connector-java")
+	runtime('com.h2database:h2')
 	runtime("org.flywaydb:flyway-core")
     testCompile('org.springframework.boot:spring-boot-starter-test') 
 }

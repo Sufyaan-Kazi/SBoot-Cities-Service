@@ -1,15 +1,8 @@
 package io.pivotal.fe.demos.config;
 
-import java.sql.DriverManager;
-
-import javax.sql.DataSource;
-
-import org.springframework.boot.autoconfigure.flyway.FlywayMigrationStrategy;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 @Configuration
 @ConfigurationProperties(prefix="spring.datasource")

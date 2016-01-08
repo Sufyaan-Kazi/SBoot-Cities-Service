@@ -287,6 +287,10 @@ usage ()
 trap 'abort $LINENO' 0
 SECONDS=0
 
+echo_msg "Welcome"
+echo "This is a utility to script to push and setup cities, run ./push.sh -usage to see all available options"
+sleep 2
+
 # Process input args
 RESET="services"
 while [ "$1" != "" ]; do

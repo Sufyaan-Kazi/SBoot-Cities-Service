@@ -4,7 +4,7 @@
 
 set -e
 
-APPNAME=cities
+APPNAME=cities-service
 DBSERVICE=MyDB
 DISCOVERY=ServiceReg
 

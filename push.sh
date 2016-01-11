@@ -203,7 +203,8 @@ push()
   SRC_APP_NAME=$APPNAME
   DATE=`date "+%Y%m%d%H%M%S"`
   APPNAME=$APPNAME-$DATE
-  DOMAIN=`cf target | grep "API" | cut -d" " -f5 | sed "s/[^.]*.//"`
+  #DOMAIN=`cf target | grep "API" | cut -d" " -f5 | sed "s/[^.]*.//"`
+  DOMAIN=`cf domains | grep shared | head -n 1 | cut -d" " -f1`
 
   # Is this an app Promotion?
   if [ "$PROMOTE" == "true" ]

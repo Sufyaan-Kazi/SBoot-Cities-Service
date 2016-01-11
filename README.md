@@ -1,11 +1,11 @@
 # SBoot-Cities-Service
 This microservice runs on a local machine or on Cloud Foundry. Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, as well as Dave Syer and Scott Frederick in this and other branches :) This is the SCS branch which works with Spring Cloud Services.
 
-This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create a complex webservice which exposes CRUD operations as restful endpoints.
+This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create a complex webservice which exposes CRUD operations as restful endpoints. It's good when doing a demo on Spring Boot to iteratively build the app by building just a web controller to say hello worl,d then modify it to return a list of City objects, then to read those city objects froma db, and then finally elminate most of the code and just leave the single Repository interface which does so much more ! Oh - also to show off actuator!
 
 ![Cities](/docs/Arch.png)
 
-As you can see above, the Microservice is pretty lightweight, a full explanation of the architecture can be found further down this page. This branch of the Microservice was designed to utilise Netflix OSS features sucj as Eureka, Config Server. As its a Spring app this is very simple when running locally but also I can utilise an enerprise version when running in Pivotal Cloud Foundry
+As you can see above, the Microservice is pretty lightweight, a full explanation of the architecture can be found further down this page. This branch of the Microservice was designed to utilise Netflix OSS features such as Eureka, Config Server. As its a Spring app this is very simple when running locally but also I can utilise an enetrprise version when running in Pivotal Cloud Foundry
 
 ![Cities](/docs/SCS_Arch.png)
 
@@ -17,7 +17,7 @@ To run outside of Eclipse just run
 on your command line. You don't need to have gradle installed.
 
 ###Cloud Foundry!
-Because Spring Boot is opinionated, it automatically binds this app to the correct datasources within your Cloud Foundry space. Hence, you just need to create a Service Instance of your preferred db in the space where you will be pushing your application and then bind this app to that SI. For convenience two shell scripts have been written to do a build and configure of the service instance as well as deploy to Cloud Foundry. The app will auto-populate data in the table of the db schema provisioned by Cloud Foundry in the SI - see below. Please note, when you first deploy this app it will take a long time to start because several SQL inserts are executing.
+Because Spring Boot is opinionated, it automatically binds this app to the correct datasources within your Cloud Foundry space. Hence, you just need to create a Service Instance of your preferred db in the space where you will be pushing your application and then bind this app to that SI. For convenience a shell script (push.sh) has been written to do a build and configure of the service instance as well as deploy to Cloud Foundry. The app will auto-populate data in the table of the db schema provisioned by Cloud Foundry in the SI - see below. Please note, when you first deploy this app it may take a long time to start because several SQL inserts are executing.
 
 If you've never heard of Cloud Foundry - use it! This app is very simple to construct, as soon as you deploy it to Cloud Foundry your entire support infrastructure, app server, libraries etc are configured loaded and deployed within 2 minutes - push this application to our trial instance of cloud foundry at run.pivotal.io. This si classic DevOps separation of concerns yet both in harmony together.
 

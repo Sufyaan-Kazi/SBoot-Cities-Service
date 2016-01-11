@@ -88,7 +88,7 @@ clean_cf()
 
 main()
 {
-  APPNAME=cities
+  APPNAME=cities-service
   DBSERVICE=MyDB
   check_cli_installed
   build

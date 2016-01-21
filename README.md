@@ -1,6 +1,18 @@
 # SBoot-Cities-Service
 This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create a complex webservice which exposes CRUD operations as restful endpoints. This microservice runs on a local machine or on Cloud Foundry. 
 
+![Cities](/docs/Arch.png)
+
+Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, as well as Dave Syer and Scott Frederick in this and other branches :) The SCS branch includes updates to work with Spring Cloud Services.
+
+###Running the app locally
+Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file with url, username etc settings for your database. 
+
+To run outside of Eclipse just run 
+```./gradlew bootRun ```
+on your command line. You don't need to have gradle installed.
+
+###Running the app on Cloud Foundry
 To run this on Cloud Foundry, simply run the script:
 ```./first_time_push.sh ```
 
@@ -8,25 +20,11 @@ This script creates the required Cloud Foundry services, tidies up previous inst
 
 ```./push.sh ```
 
-Alternately to build the application yoursefl, simply run:
+Alternately to build the application yourself, simply run:
 
 ``` ./gradlew clean assemble ```
 
-![Cities](/docs/Arch.png)
-
-Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, as well as Dave Syer and Scott Frederick in this and other branches :) The SCS branch includes updates to work with Spring Cloud Services.
-
-###Running locally!
-Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file with url, username etc settings for your database. 
-
-To run outside of Eclipse just run 
-```./gradlew bootRun ```
-on your command line. You don't need to have gradle installed.
-
-###Cloud Foundry!
-Because Spring Boot is opinionated, it automatically connects this app to the correct datasources within your Cloud Foundry space using Spring Cloud - no code is needed in the application itself to read the credentials supplied by Cloud Foundry. For convenience two shell scripts have been written to do a build and configure of the service instance as well as deploy to Cloud Foundry as described above.
-
-The app will auto-populate data in the table of the db schema provisioned by Cloud Foundry in the SI - see below. Please note, when you first deploy this app it will take a long time to start because several SQL inserts are executing.
+Because Spring Boot is opinionated, it automatically connects this app to the correct datasources within your Cloud Foundry space using Spring Cloud - no code is needed in the application itself to read the credentials supplied by Cloud Foundry. The app will auto-populate data in the table of the db schema provisioned by Cloud Foundry in the SI - see below. Please note, when you first deploy this app it will take a long time to start because several SQL inserts are executing.
 
 If you've never heard of Cloud Foundry - use it! This app is very simple to construct, as soon as you deploy it to Cloud Foundry your entire support infrastructure, app server, libraries etc are configured loaded and deployed within 2 minutes - push this application to our trial instance of cloud foundry at run.pivotal.io. This si classic DevOps separation of concerns yet both in harmony together.
 
@@ -38,18 +36,17 @@ When you run this app locally or on CF you can access its features using several
 * <a href="http://localhost:8080/cities/search/nameContains?q=Lon&size=3" target="_blank">http://localhost:8080/cities/search/nameContains?q=Lon&size=3</a> - returns the first three results of the search to find any cities with a name containing the word "Lon" (case insensitive search)
 * <a href="http://localhost:8080/health" target="_blank">http://localhost:8080/health</a> - This returns the current health of the app, it is provided by Spring Boot Actuator. This and all other actuator endpoints that actuator provides are available immediately.
 
-###Achitecture!
-![Cities](/docs/Classes.png)
+###Wait, I want a GUI!
+There is a separate application which can be used as a GUI to consume the data delivered by this Microservice here: https://github.com/skazi-pivotal/spring-boot-cities-ui or feel free to write your own, using that as a guide.
 
-This app is very simple, it is ultimately driven by three classes and some properties and that is it.
-* SBootCitiesAplication.java - simple class which alows you to run this class as a regular java app. Spring Boot will automaticaly configure and deploy tomcat even though you launch a regular java app. 
-* City.java - This class uses JPA to bind to a database table called uktowns. The table is where city data is held, this class maps java fields to the column names and enables Spring Data to dynamically construct instances of the class when it fetches data from the database. (Data is loaded in automatically - see the section below)
-* CityRepository.java - This "interface" declares both restful endpoints as well as defines SQL operations required. Spring Boot and Spring Web automatically register typical DB endpoints for CRUD operations without the need to edit a web.xml or any other configuration files. Spring also "automagically" builds the right SQL queries to search, update, insert and retirve data from the database by automatically interpreting method names into real logic. This class also returns results as pages (i.e. 20 results at a time, but this can be tweaked using paramters to RESTFUL calls.
-* WebController.java (optional) - This class isn't necessary, however it exposes a new REST endpoint 'cities_all' which lists all cities with no paging or size control options
-* DataSourceConfig.java (optional) - This class isn't necessary, however it allows you to run this application locally on your Mac, desktop etc - it will bound your app to a local MySQL Server. You can use hibernate very easily instead, see the original project this is forked from.
+###What about Netflix OSS and Spring Cloud Services?
+Netflix OSS is a great way of managing distributed Microservices. There is another branch of this project which takes advantgaes of Spring Cloud Services in Pivotal Cloud Foundry, therfore automatically including several Netflix OSS features. To see this switch to the SCS branch.
 
-###Can I get some metrics!
+###Can I get some metrics?
 Spring Boot Actuator automatically exposes endpoints which allow you to consume useful information such as health, configprops, for more info check this out: http://docs.spring.io/autorepo/docs/spring-boot/1.2.0.M2/reference/htmlsingle/#production-ready
+
+###This app is too simple
+Yes it is, but ok then if you want a more advanced Microservice based application you should really check out this Repo: https://github.com/dpinto-pivotal/cf-SpringBootTrader. This is several microservices tied together using some great Netflix OSS features delivered via Spring and Cloud Foundry.
 
 ###How is data loaded?
 With Spring and Spring Boot there are several ways to get an applicaton to initialise and load data automatically into a database on startup. This application uses flyway, but can also use Hibernate instead. For more info check out this page: https://docs.spring.io/spring-boot/docs/current/reference/html/howto-database-initialization.html
@@ -68,14 +65,15 @@ spring.jpa.hibernate.naming-strategy = org.hibernate.cfg.ImprovedNamingStrategy
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5Dialect
 ```
 
-###Wait, I want a GUI!
-There is a separate application which can be used as a GUI to consume the data delivered by this Microservice here: https://github.com/skazi-pivotal/spring-boot-cities-ui or feel free to write your own, using that as a guide.
+###Achitecture
+![Cities](/docs/Classes.png)
 
-###This is too simple!!
-Yes it is, but ok then if you want a more advanced Microservice based application you should really check out this Repo: https://github.com/dpinto-pivotal/cf-SpringBootTrader. This is several microservices tied together using some great Netflix OSS features delivered via Spring and Cloud Foundry.
-
-###What about Netflix OSS and Spring Cloud Services?
-Netflix OSS is a great way of managing distributed Microservices. There is another branch of this project which takes advantgaes of Spring Cloud Services in Pivotal Cloud Foundry, therfore automatically including several Netflix OSS features. To see this switch to the SCS branch.
+This app is very simple, it is ultimately driven by three classes and some properties and that is it.
+* SBootCitiesAplication.java - simple class which alows you to run this class as a regular java app. Spring Boot will automaticaly configure and deploy tomcat even though you launch a regular java app. 
+* City.java - This class uses JPA to bind to a database table called uktowns. The table is where city data is held, this class maps java fields to the column names and enables Spring Data to dynamically construct instances of the class when it fetches data from the database. (Data is loaded in automatically - see the section below)
+* CityRepository.java - This "interface" declares both restful endpoints as well as defines SQL operations required. Spring Boot and Spring Web automatically register typical DB endpoints for CRUD operations without the need to edit a web.xml or any other configuration files. Spring also "automagically" builds the right SQL queries to search, update, insert and retirve data from the database by automatically interpreting method names into real logic. This class also returns results as pages (i.e. 20 results at a time, but this can be tweaked using paramters to RESTFUL calls.
+* WebController.java (optional) - This class isn't necessary, however it exposes a new REST endpoint 'cities_all' which lists all cities with no paging or size control options
+* DataSourceConfig.java (optional) - This class isn't necessary, however it allows you to run this application locally on your Mac, desktop etc - it will bound your app to a local MySQL Server. You can use hibernate very easily instead, see the original project this is forked from.
 
 ###Tell me more
 Spring Boot is designed to get you up and running quickly and it is opinionated, so:

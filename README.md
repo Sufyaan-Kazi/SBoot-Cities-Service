@@ -16,7 +16,7 @@ on your command line. You don't need to have gradle installed.
 To run this on Cloud Foundry, simply run the script:
 ```./first_time_push.sh ```
 
-This script creates the required Cloud Foundry services, tidies up previous installations, pushes the app and binds the app to the service. Once the env is setup correctly, feel free to use the other script which will build and push the app to cloud foundry:
+This script creates the required Cloud Foundry services, tidies up previous installations, pushes the app and binds the app to the service. Once the env is setup correctly, feel free to use the other script which will both build and push the app to cloud foundry:
 
 ```./push.sh ```
 
@@ -24,7 +24,7 @@ Alternately to build the application yourself, simply run:
 
 ``` ./gradlew clean assemble ```
 
-Because Spring Boot is opinionated, it automatically connects this app to the correct datasources within your Cloud Foundry space using Spring Cloud - no code is needed in the application itself to read the credentials supplied by Cloud Foundry. The app will auto-populate data in the table of the db schema provisioned by Cloud Foundry in the SI - see below. Please note, when you first deploy this app it will take a long time to start because several SQL inserts are executing.
+Because Spring Boot is opinionated, it automatically connects this app to the correct datasources within your Cloud Foundry space using Spring Cloud Connectors - no code is needed in the application itself to read the credentials supplied by Cloud Foundry. The app will auto-populate data in the table of the db schema provisioned by Cloud Foundry in the SI - see below. Please note, when you first deploy this app it will take a long time to start because several SQL inserts are executing.
 
 If you've never heard of Cloud Foundry - use it! This app is very simple to construct, as soon as you deploy it to Cloud Foundry your entire support infrastructure, app server, libraries etc are configured loaded and deployed within 2 minutes - push this application to our trial instance of cloud foundry at run.pivotal.io. This si classic DevOps separation of concerns yet both in harmony together.
 

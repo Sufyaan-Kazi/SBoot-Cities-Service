@@ -39,6 +39,8 @@ When you run this app locally or on CF you can access its features using several
 * <a href="http://localhost:8080/health" target="_blank">http://localhost:8080/health</a> - This returns the current health of the app, it is provided by Spring Boot Actuator. This and all other actuator endpoints that actuator provides are available immediately.
 
 ###Achitecture!
+![Cities](/docs/Classes.png)
+
 This app is very simple, it is ultimately driven by three classes and some properties and that is it.
 * SBootCitiesAplication.java - simple class which alows you to run this class as a regular java app. Spring Boot will automaticaly configure and deploy tomcat even though you launch a regular java app. 
 * City.java - This class uses JPA to bind to a database table called uktowns. The table is where city data is held, this class maps java fields to the column names and enables Spring Data to dynamically construct instances of the class when it fetches data from the database. (Data is loaded in automatically - see the section below)

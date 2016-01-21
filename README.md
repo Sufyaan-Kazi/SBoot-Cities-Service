@@ -2,7 +2,7 @@
 This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create a complex webservice which exposes CRUD operations as restful endpoints. This microservice runs on a local machine or on Cloud Foundry. 
 
 To run this on Cloud Foundry, simply run the script:
-```./firstTimePush.sh ```
+```./first_time_push.sh ```
 
 This script creates the required Cloud Foundry services, tidies up previous installations, pushes the app and binds the app to the service. Once the env is setup correctly, feel free to use the other script which will build and push the app to cloud foundry:
 

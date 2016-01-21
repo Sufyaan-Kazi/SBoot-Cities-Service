@@ -1,23 +1,37 @@
 # SBoot-Cities-Service
-This microservice runs on a local machine or on Cloud Foundry. Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, as well as Dave Syer and Scott Frederick in this and other branches :) The SCS branch includes updates to work with Spring Cloud Services.
+This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create a complex webservice which exposes CRUD operations as restful endpoints. This microservice runs on a local machine or on Cloud Foundry. 
 
-This is a very simple Spring Boot project which demonstrates, that with only small a footprint of code its possible to a create a complex webservice which exposes CRUD operations as restful endpoints.
+To run this on Cloud Foundry, simply run the script:
+```./firstTimePush.sh ```
+
+This script creates the required Cloud Foundry services, tidies up previous installations, pushes the app and binds the app to the service. Once the env is setup correctly, feel free to use the other script which will build and push the app to cloud foundry:
+
+```./push.sh ```
+
+Alternately to build the application yoursefl, simply run:
+
+``` ./gradlew clean assemble ```
 
 ![Cities](/docs/Arch.png)
 
+Note: This is a FORK of https://github.com/cf-platform-eng/spring-boot-cities! Thanks to help and tips from my team, as well as Dave Syer and Scott Frederick in this and other branches :) The SCS branch includes updates to work with Spring Cloud Services.
+
 ###Running locally!
-Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file to point to that db. 
+Assuming you have access to a database server (e.g. MySQL, PostGres) or even have one running on your local machine, this microservice will run immediately on your desktop (within eclipse, standalone etc). Just create an empty database and amend the application.yml file with url, username etc settings for your database. 
+
 To run outside of Eclipse just run 
 ```./gradlew bootRun ```
 on your command line. You don't need to have gradle installed.
 
 ###Cloud Foundry!
-Because Spring Boot is opinionated, it automatically binds this app to the correct datasources within your Cloud Foundry space. Hence, you just need to create a Service Instance of your preferred db in the space where you will be pushing your application and then bind this app to that SI. For convenience two shell scripts have been written to do a build and configure of the service instance as well as deploy to Cloud Foundry. The app will auto-populate data in the table of the db schema provisioned by Cloud Foundry in the SI - see below. Please note, when you first deploy this app it will take a long time to start because several SQL inserts are executing.
+Because Spring Boot is opinionated, it automatically connects this app to the correct datasources within your Cloud Foundry space using Spring Cloud - no code is needed in the application itself to read the credentials supplied by Cloud Foundry. For convenience two shell scripts have been written to do a build and configure of the service instance as well as deploy to Cloud Foundry as described above.
+
+The app will auto-populate data in the table of the db schema provisioned by Cloud Foundry in the SI - see below. Please note, when you first deploy this app it will take a long time to start because several SQL inserts are executing.
 
 If you've never heard of Cloud Foundry - use it! This app is very simple to construct, as soon as you deploy it to Cloud Foundry your entire support infrastructure, app server, libraries etc are configured loaded and deployed within 2 minutes - push this application to our trial instance of cloud foundry at run.pivotal.io. This si classic DevOps separation of concerns yet both in harmony together.
 
 ###Usage!
-When you run this app locally or on CF you can access its features using several RESTful endpoints. Note - this is only a SMALL sample of the endpoints available, this app exposes AHTEOS endpoints. e.g. when running locally:
+When you run this app locally or on CF you can access its features using several RESTful endpoints. Note - this is only a SMALL sample of the endpoints available, this app exposes HATEOS endpoints. e.g. when running locally:
 * <a href="http://localhost:8080/cities" target="_blank">http://localhost:8080/cities</a> - returns a single page JSON listing cities (20 cities in a page)
 * <a href="http://localhost:8080/cities?page=2&size=5" target="_blank">http://localhost:8080/cities?page=2&size=5</a> - returns only FIVE results from the SECOND page
 * <a href="http://localhost:8080/cities/search/name?q=London" target="_blank">http://localhost:8080/cities/search/name?q=London</a> - returns a list of cities with London in their name.

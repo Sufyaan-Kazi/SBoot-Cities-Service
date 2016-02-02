@@ -38,6 +38,7 @@ When you run this app locally or on CF you can access its features using several
 
 ###Wait, I want a GUI!
 There is a separate application which can be used as a GUI to consume the data delivered by this Microservice here: https://github.com/skazi-pivotal/spring-boot-cities-ui or feel free to write your own, using that as a guide.
+[Cities-ui](/docs/Cities-ui.png
 
 ###What about Netflix OSS and Spring Cloud Services?
 Netflix OSS is a great way of managing distributed Microservices. There is another branch of this project which takes advantgaes of Spring Cloud Services in Pivotal Cloud Foundry, therfore automatically including several Netflix OSS features. To see this switch to the SCS branch.

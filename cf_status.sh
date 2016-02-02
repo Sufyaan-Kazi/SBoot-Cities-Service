@@ -1,2 +1,0 @@
-cf apps
-cf services
